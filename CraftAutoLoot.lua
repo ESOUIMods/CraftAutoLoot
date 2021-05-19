@@ -1,16 +1,60 @@
-CraftAutoLoot = {}
+CraftAutoLoot      = {}
 
 CraftAutoLoot.name = "CraftAutoLoot"
 
 function CraftAutoLoot:Initialize()
-   ZO_ReticleContainerInteract:SetHandler("OnShow", function()
-      local action, container, _, _, additionalInfo, _ = GetGameCameraInteractableActionInfo()
-      if action == "Mine" or action == "Collect" or action == "Cut" or action == "Reel In" or ((container == "Apple Basket" or container == "Apple Crate" or container == "Barrel" or container == "Barrels" or container == "Basket" or container == "Cabinet" or container == "Corn Basket" or container == "Crate" or container == "Crates" or container == "Flour Sack" or container == "Greens Basket" or container == "Melon Basket" or container == "Millet Sack" or container == "Sack" or container == "Saltrice Sack" or container == "Seasoning Sack" or container == "Tomato Crate" or container == "Heavy Sack" or container == "Heavy Crate") and action == "Search") then
-         SetSetting(SETTING_TYPE_LOOT, LOOT_SETTING_AUTO_LOOT, 1)
-      else
-	 SetSetting(SETTING_TYPE_LOOT, LOOT_SETTING_AUTO_LOOT, 0)
-      end
-   end)
+  ZO_ReticleContainerInteract:SetHandler("OnShow", function()
+    local action, container, _, _, additionalInfo, _ = GetGameCameraInteractableActionInfo()
+    local searchAction                               = "Search"
+    local isAction                                   = {
+      ["Mine"] = true,
+      ["Collect"] = true,
+      ["Cut"] = true,
+      ["Reel In"] = true,
+    }
+    local isLootable                                 = {
+      ["Apple Basket"] = true,
+      ["Apple Crate"] = true,
+      ["Apples"] = true,
+      ["Backpack"] = true,
+      ["Bookshelf"] = true,
+      ["Barrel"] = true,
+      ["Barrels"] = true,
+      ["Basket"] = true,
+      ["Cabinet"] = true,
+      ["Cauldron"] = true,
+      ["Cupboard"] = true,
+      ["Corn Basket"] = true,
+      ["Crate"] = true,
+      ["Crates"] = true,
+      ["Desk"] = true,
+      ["Drawers"] = true,
+      ["Dresser"] = true,
+      ["Flour Sack"] = true,
+      ["Greens Basket"] = true,
+      ["Heavy Crate"] = true,
+      ["Heavy Sack"] = true,
+      ["Jewelry Box"] = true,
+      ["Keg"] = true,
+      ["Melon Basket"] = true,
+      ["Millet Basket"] = true,
+      ["Nightstand"] = true,
+      ["Pumpkin Basket"] = true,
+      ["Rack"] = true,
+      ["Sack"] = true,
+      ["Saltrice Sack"] = true,
+      ["Seasoning Sack"] = true,
+      ["Tomato Crate"] = true,
+      ["Trunk"] = true,
+      ["Urn"] = true,
+      ["Wardrobe"] = true,
+    }
+    if isAction[action] or ((isLootable[container]) and action == searchAction) then
+      SetSetting(SETTING_TYPE_LOOT, LOOT_SETTING_AUTO_LOOT, 1)
+    else
+      SetSetting(SETTING_TYPE_LOOT, LOOT_SETTING_AUTO_LOOT, 0)
+    end
+  end)
 end
 
 function CraftAutoLoot.OnAddOnLoaded(event, addonName)
