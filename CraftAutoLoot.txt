@@ -1,8 +1,8 @@
 ## Title: CraftAutoLoot
-## APIVersion: 100034 100035
+## APIVersion: 101032 101033
 ## Description: Automatically turns on autoloot when your target is a crafting node (wood, ore, plants, water, herbs, glyphs, or fishing) or other crafting related container.
-## Version: 1.20
-## AddOnVersion: 120
+## Version: 1.21
+## AddOnVersion: 121
 ## Author: Jhenox
 
 CraftAutoLoot.lua
